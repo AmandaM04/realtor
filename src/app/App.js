@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
+import Listings from '../components/Listings/Listings';
+import Building from '../components/Building/Building';
+import ListingForm from '../components/ListingForm/ListingForm';
+
 import './App.css';
 
 class App extends Component {
   render () {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <button className="btn btn-danger">I am a Button</button>
+        <div className="col-sm-6">
+          <Listings />
+        </div>
+        <div className="col-sm-6">
+          <Building />
+        </div>
+        <div className="col-sm-12">
+          <ListingForm />
+        </div>
       </div>
     );
   }
