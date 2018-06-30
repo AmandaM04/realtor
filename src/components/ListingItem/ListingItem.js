@@ -9,7 +9,15 @@ class ListingItem extends React.Component {
   static propTypes = {
     listing: listingShape,
     index: PropTypes.number,
+    onSelect: PropTypes.func,
   }
+
+  listingClick = (e) => {
+    e.stopPropagation();
+    const {listing, onSelect} = this.props;
+    onSelect(listing.id);
+  }
+
   render () {
     const { listing, index } = this.props;
     return (
