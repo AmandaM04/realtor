@@ -31,6 +31,8 @@ class App extends Component {
   }
 
   render () {
+    const {selectedListingId, listings} = this.state;
+    const selectedListing = listings.find(listing => listing.id === selectedListingId); /* if you are only returning a single thing and not doing anything with it, you can write it like so without the curly braces.*/
     return (
       <div className="App">
         <div className="col-sm-6">
@@ -40,7 +42,7 @@ class App extends Component {
           />
         </div>
         <div className="col-sm-6">
-          <Building />
+          <Building listing={selectedListing} />
         </div>
         <div className="col-sm-12">
           <ListingForm />
