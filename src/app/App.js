@@ -27,12 +27,25 @@ class App extends Component {
   }
 
   listingSelectEvent = (id) => {
-    this.setState({ selectedListingId: id});
+    this.setState({ selectedListingId: id });
+  }
+
+  formSubmitEvent = (newListing) => {
+    listingRequests.postRequest(newListing)
+      .then(() => {
+        listingRequests.getRequest()
+          .then((listings) => {
+            this.setState({ listings });
+          });
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
   }
 
   render () {
-    const {selectedListingId, listings} = this.state;
-    const selectedListing = listings.find(listing => listing.id === selectedListingId) || {nope: 'nope'}; /* if you are only returning a single thing and not doing anything with it, you can write it like so without the curly braces.*/
+    const { selectedListingId, listings } = this.state;
+    const selectedListing = listings.find(listing => listing.id === selectedListingId) || { nope: 'nope' }; /* if you are only returning a single thing and not doing anything with it, you can write it like so without the curly braces.*/
     return (
       <div className="App">
         <div className="col-sm-6">
@@ -45,7 +58,9 @@ class App extends Component {
           <Building listing={selectedListing} />
         </div>
         <div className="col-sm-12">
-          <ListingForm />
+          <ListingForm
+            onSubmit={this.formSubmitEvent}
+          />
         </div>
       </div>
     );
